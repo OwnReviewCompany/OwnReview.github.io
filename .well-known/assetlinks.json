@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "ownreview",
+    "package_name": "com.ownreview.ownreview",
+    "sha256_cert_fingerprints": [
+      F8:E9:AB:1D:2D:0C:46:22:59:91:3D:1A:3A:9C:43:7C:9E:03:9C:A3:D7:E8:F0:DA:33:38:6D:92:9A:A3:A5:E6
+    ]
+  }
+}]
