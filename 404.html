@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwnReview - アプリをダウンロード</title>
+    <meta name="description" content="OwnReviewでレビューをチェックしよう！">
+    
+    <!-- Open Graph tags for better sharing -->
+    <meta property="og:title" content="OwnReview - アプリをダウンロード">
+    <meta property="og:description" content="OwnReviewでレビューをチェックしよう！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ownreviewcompany.github.io/OwnReview.github.io">
+    <meta property="og:image" content="https://ownreviewcompany.github.io/OwnReview.github.io/assets/og-image.png">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            background: #000;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            min-width: 200px;
+        }
+        .download-btn:hover {
+            transform: translateY(-1px);
+        }
+        .app-store {
+            background: #000;
+            color: white;
+        }
+        .play-store {
+            background: #01875f;
+            color: white;
+        }
+        .loading {
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon"></div>
+        <h1>OwnReview</h1>
+        <p>このコンテンツを見るには<br>OwnReviewアプリをダウンロードしてください</p>
+        
+        <div class="download-buttons">
+            <a href="https://apps.apple.com/us/app/ownreview/id6743192347" class="download-btn app-store">
+                App Storeからダウンロード
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.ownreview.ownreview" class="download-btn play-store">
+                Google Playからダウンロード
+            </a>
+        </div>
+        
+        <div class="loading">
+            アプリが自動で開かない場合は、上のボタンからダウンロードしてください
+        </div>
+    </div>
+
+    <script>
+        // 現在のURLから情報を取得
+        const currentPath = window.location.pathname;
+        const currentSearch = window.location.search;
+        console.log('404 page loaded for:', currentPath);
+        
+        // ユーザーエージェント判定
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+        const isAndroid = /android/i.test(userAgent);
+        
+        // GitHub Pagesのパス構造に対応してpostIdを抽出
+        // /OwnReview.github.io/post/abc123 → abc123
+        const postMatch = currentPath.match(/\/OwnReview\.github\.io\/post\/([^\/\?]+)/);
+        const postId = postMatch ? postMatch[1] : null;
+        
+        console.log('Extracted postId:', postId);
+        
+        if (postId && (isIOS || isAndroid)) {
+            // モバイルの場合、ディープリンクを試行
+            const appScheme = `ownreview://post/${postId}`;
+            console.log('Attempting deep link:', appScheme);
+            
+            // アプリを開く試行
+            const startTime = Date.now();
+            window.location.href = appScheme;
+            
+            // 3秒後にアプリが開かなかった場合はストアに誘導
+            setTimeout(() => {
+                // アプリが開いた場合、通常はページがフォーカスを失う
+                // 3秒経ってもここにいる場合はアプリが開かなかった可能性が高い
+                if (Date.now() - startTime >= 2500) {
+                    if (isIOS) {
+                        window.location.href = 'https://apps.apple.com/us/app/ownreview/id6743192347';
+                    } else if (isAndroid) {
+                        window.location.href = 'https://play.google.com/store/apps/details?id=com.ownreview.ownreview';
+                    }
+                }
+            }, 3000);
+        }
+        
+        // ページの可視性が変わった時の処理（アプリが開いたかどうかの判定）
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                console.log('Page became hidden - app might have opened');
+            }
+        });
+        
+        // ページがフォーカスを失った時の処理
+        window.addEventListener('blur', () => {
+            console.log('Window lost focus - app might have opened');
+        });
+    </script>
+</body>
+</html>
