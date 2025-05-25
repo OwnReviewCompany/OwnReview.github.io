@@ -10,8 +10,8 @@
     <meta property="og:title" content="OwnReview - アプリをダウンロード">
     <meta property="og:description" content="OwnReviewでレビューをチェックしよう！">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourappname.com">
-    <meta property="og:image" content="https://yourappname.com/assets/og-image.png">
+    <meta property="og:url" content="https://ownreviewcompany.github.io/OwnReview.github.io">
+    <meta property="og:image" content="https://ownreviewcompany.github.io/OwnReview.github.io/assets/og-image.png">
     
     <style>
         body {
@@ -90,9 +90,10 @@
             const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
             const isAndroid = /android/i.test(userAgent);
             
-            // URLからpostIdを取得
+            // URLからpostIdを取得（GitHub Pagesのパスを考慮）
             const path = window.location.pathname;
-            const postMatch = path.match(/\/post\/(.+)/);
+            // /OwnReview.github.io/post/123 の形式からpostIdを抽出
+            const postMatch = path.match(/\/OwnReview\.github\.io\/post\/(.+)/);
             const postId = postMatch ? postMatch[1] : null;
             
             // ディープリンクを試行
