@@ -3,7 +3,7 @@
     "apps": [],
     "details": [{
       "appID": "TEAMID.com.ownreview.ownreview",
-      "paths": ["/post/*"]
+      "paths": ["/OwnReview.github.io/post/*"]
     }]
   }
 }
