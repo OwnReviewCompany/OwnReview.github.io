@@ -1,9 +1,22 @@
 {
   "applinks": {
-    "apps": [],
-    "details": [{
-      "appID": "4LMY873VDN.com.ownreview.ownreview",
-      "paths": ["/OwnReview.github.io/post/*"]
-    }]
+    "details": [
+      {
+        "appIDs": ["4PDZVP3J48.com.ownreview.app"],
+        "components": [
+          {
+            "/": "/OwnReview.github.io/post/*",
+            "comment": "投稿詳細画面へのディープリンク"
+          },
+          {
+            "/": "/OwnReview.github.io/profile/*",
+            "comment": "プロフィール画面へのディープリンク"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["4PDZVP3J48.com.ownreview.app"]
   }
 }
